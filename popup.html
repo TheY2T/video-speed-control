@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Speed Control</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <span class="icon">&#9654;</span>
+        <h1>Video Speed</h1>
+      </header>
+
+      <div id="error-msg" class="hidden"></div>
+
+      <div id="no-video" class="hidden">
+        <p>No video found on this page.</p>
+      </div>
+
+      <div id="video-list" class="hidden"></div>
+
+      <div id="controls" class="hidden">
+        <div class="speed-display">
+          <span id="speed-label">1.0&times;</span>
+        </div>
+
+        <div class="slider-wrap">
+          <input type="range" id="speed-slider" min="0" max="5" step="0.1" value="1.0" />
+          <div class="slider-labels">
+            <span>0&times;</span>
+            <span>5&times;</span>
+          </div>
+        </div>
+
+        <div class="presets">
+          <button class="preset-btn" data-speed="0.5">0.5&times;</button>
+          <button class="preset-btn" data-speed="1">1&times;</button>
+          <button class="preset-btn" data-speed="1.5">1.5&times;</button>
+          <button class="preset-btn" data-speed="2">2&times;</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./src/popup.ts"></script>
+  </body>
+</html>

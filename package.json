@@ -1,0 +1,16 @@
+{
+  "name": "@they2t/video-speed-control",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build && vite build --config vite.content.config.ts && node scripts/copy-assets.js",
+    "dev": "vite build --watch"
+  },
+  "devDependencies": {
+    "@types/chrome": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "packageManager": "pnpm@9.15.4"
+}
