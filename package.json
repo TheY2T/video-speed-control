@@ -5,11 +5,21 @@
   "type": "module",
   "scripts": {
     "build": "vite build && vite build --config vite.content.config.ts && node scripts/copy-assets.js",
-    "dev": "vite build --watch"
+    "dev": "concurrently \"vite build --watch\" \"vite build --config vite.content.config.ts --watch\"",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write \"src/**/*.{ts,css}\" popup.html \"*.{json,md,yaml}\"",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:",
     "@types/chrome": "catalog:",
+    "concurrently": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "prettier": "catalog:",
     "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
     "vite": "catalog:"
   },
   "packageManager": "pnpm@9.15.4"
