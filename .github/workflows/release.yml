@@ -65,7 +65,7 @@ jobs:
           git add package.json manifest.json CHANGELOG.md .changeset/
           git commit -m "chore: release v${{ steps.version.outputs.value }}"
           git pull --rebase origin ${{ github.ref_name }}
-          git tag v${{ steps.version.outputs.value }}
+          git tag -a v${{ steps.version.outputs.value }} -m "Release v${{ steps.version.outputs.value }}"
           git push origin HEAD:${{ github.ref_name }} --follow-tags
 
       - name: Create release
