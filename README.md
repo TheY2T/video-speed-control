@@ -16,13 +16,13 @@ A lightweight Chromium browser extension that lets you control the playback spee
 
 Works in all Chromium-based browsers via Manifest V3:
 
-| Browser | Support |
-|---|---|
-| Chrome 88+ | ✅ |
-| Edge 88+ (Chromium) | ✅ |
-| Brave | ✅ |
-| Opera 74+ | ✅ |
-| Arc | ✅ |
+| Browser             | Support |
+| ------------------- | ------- |
+| Chrome 88+          | ✅      |
+| Edge 88+ (Chromium) | ✅      |
+| Brave               | ✅      |
+| Opera 74+           | ✅      |
+| Arc                 | ✅      |
 
 Firefox MV3 support is not in scope for v1 due to minor API differences.
 
@@ -88,12 +88,12 @@ video-speed-control/
 
 ## Tech stack
 
-| Tool | Role |
-|---|---|
-| TypeScript 5 | All source files |
-| Vite 6 | Bundler — separate configs for popup and content script |
-| pnpm 9 + catalogs | Package management with centralised version pins |
-| Chrome Extensions MV3 | `chrome.storage`, `chrome.tabs`, `chrome.runtime` APIs |
+| Tool                  | Role                                                    |
+| --------------------- | ------------------------------------------------------- |
+| TypeScript 5          | All source files                                        |
+| Vite 6                | Bundler — separate configs for popup and content script |
+| pnpm 9 + catalogs     | Package management with centralised version pins        |
+| Chrome Extensions MV3 | `chrome.storage`, `chrome.tabs`, `chrome.runtime` APIs  |
 
 ---
 

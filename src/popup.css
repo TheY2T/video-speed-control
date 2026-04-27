@@ -198,7 +198,10 @@ h1 {
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.12s, color 0.12s, background 0.12s;
+  transition:
+    border-color 0.12s,
+    color 0.12s,
+    background 0.12s;
 }
 
 .preset-btn:hover {

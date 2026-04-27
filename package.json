@@ -9,9 +9,11 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.{ts,css}\" popup.html \"*.{json,md,yaml}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "changeset": "changeset"
   },
   "devDependencies": {
+    "@changesets/cli": "catalog:",
     "@eslint/js": "catalog:",
     "@types/chrome": "catalog:",
     "concurrently": "catalog:",

@@ -17,27 +17,29 @@ No information about you, your browsing activity, or the pages you visit is ever
 
 The extension stores two values in your browser's local storage (`chrome.storage.local`) to preserve your preferences between sessions:
 
-| Value | Purpose |
-|---|---|
-| `lastSpeed` | Your most recently selected playback speed |
+| Value            | Purpose                                                |
+| ---------------- | ------------------------------------------------------ |
+| `lastSpeed`      | Your most recently selected playback speed             |
 | `lastVideoIndex` | Which video was selected if a page has multiple videos |
 
 This data:
+
 - Never leaves your device
 - Is not tied to any account or identity
 - Can be cleared at any time by removing the extension or clearing browser storage
 
 ## Permissions Used
 
-| Permission | Why it is needed |
-|---|---|
-| `storage` | Saves your last playback speed and selected video so the popup restores your preferences next time |
-| `activeTab` | Identifies the currently focused tab so the popup can communicate with the content script running on that tab |
+| Permission                     | Why it is needed                                                                                                                                     |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `storage`                      | Saves your last playback speed and selected video so the popup restores your preferences next time                                                   |
+| `activeTab`                    | Identifies the currently focused tab so the popup can communicate with the content script running on that tab                                        |
 | `host_permissions: <all_urls>` | Videos can be embedded on any website; the extension must be able to run on any domain to detect and control `<video>` elements wherever they appear |
 
 ## Content Script Behavior
 
 A content script is injected into every webpage you visit. It:
+
 - Listens for messages from the extension popup
 - Reads the list of `<video>` elements on the current page (dimensions, play state, current speed)
 - Sets the `playbackRate` property on a video when you change the speed

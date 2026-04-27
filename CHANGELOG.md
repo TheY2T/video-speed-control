@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-04-26
 
 ### Added
+
 - Speed control slider (0×–5× in 0.1 increments)
 - Preset buttons: 0.5×, 1×, 1.5×, 2×
 - Multi-video support with in-popup video picker showing dimensions and play state

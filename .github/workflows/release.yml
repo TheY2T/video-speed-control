@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        # version auto-detected from "packageManager" field in package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check for pending changesets
+        run: |
+          if [ -z "$(ls .changeset/*.md 2>/dev/null | grep -v README.md)" ]; then
+            echo "No pending changesets found. Run 'pnpm changeset' to add one before releasing."
+            exit 1
+          fi
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Apply changesets
+        run: pnpm changeset version
+
+      - name: Get new version
+        id: version
+        run: echo "value=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Sync manifest.json version
+        run: |
+          jq '.version = "${{ steps.version.outputs.value }}"' manifest.json > manifest.tmp.json
+          mv manifest.tmp.json manifest.json
+
+      - name: Build
+        run: pnpm build
+
+      - name: Zip dist
+        run: cd dist && zip -r ../video-speed-control-v${{ steps.version.outputs.value }}.zip .
+
+      - name: Extract release notes
+        run: awk '/^## /{if(found) exit; found=1; next} found{print}' CHANGELOG.md > release-notes.md
+
+      - name: Commit and tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json manifest.json CHANGELOG.md .changeset/
+          git commit -m "chore: release v${{ steps.version.outputs.value }}"
+          git tag v${{ steps.version.outputs.value }}
+          git push origin HEAD:${{ github.ref_name }} --follow-tags
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ steps.version.outputs.value }} \
+            --title "v${{ steps.version.outputs.value }}" \
+            --notes-file release-notes.md \
+            video-speed-control-v${{ steps.version.outputs.value }}.zip
